@@ -5,13 +5,35 @@ import { IoNotifications } from "react-icons/io5";
 import { FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { BiLogOut } from "react-icons/bi";
+import { useMutation } from "@tanstack/react-query";
 
 const Sidebar = () => {
+
+  const {mutate, isPending,isError,error} = useMutation({
+    mutationFn: async() =>{
+      try {
+        const res = await fetch("/api/auth/logout", {
+          method: "POST",
+        })
+        const data = await res.json();
+        if(!res.ok) {
+          throw new Error(data.error || "Something went wrong")
+        }
+      } catch (error) {
+        throw new Error(error);
+      }
+    },
+    onSuccess: () => {
+      
+    }
+  })
+
   const data = {
     fullName: "John Doe",
     username: "johndoe",
     profileImg: "/avatars/boy1.png",
   };
+
 
   return (
     <div className="md:flex-[2_2_0] w-18 max-w-52">
