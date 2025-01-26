@@ -36,10 +36,10 @@ const HomePage = () => {
         {/*  CREATE POST INPUT */}
         <CreatePost />
 
-        {/* POSTS */}
-        <Posts feedType={feedType} />
-      </div>
-    </>
-  );
+				{/* POSTS */}
+				<Posts feedType={feedType} />
+			</div>
+		</>
+	);
 };
 export default HomePage;
