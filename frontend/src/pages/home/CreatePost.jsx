@@ -33,8 +33,10 @@ const CreatePost = () => {
 				if (!res.ok) {
 					throw new Error(data.error || "Something went wrong");
 				}
+				console.log('Post created:', data);
 				return data;
 			} catch (error) {
+				console.error('Error creating post:', error);
 				throw new Error(error);
 			}
 		},
@@ -57,6 +59,7 @@ const CreatePost = () => {
 		if (file) {
 			const reader = new FileReader();
 			reader.onload = () => {
+				console.log("Image loaded in fronted:", reader.result); 
 				setImg(reader.result);
 			};
 			reader.readAsDataURL(file);

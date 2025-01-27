@@ -3,6 +3,16 @@ import Post from "../models/post.model.js";
 import User from "../models/user.model.js";
 import {v2 as cloudinary} from 'cloudinary';
 
+// Initialize Cloudinary
+// this may create a big issue in uploading to cloudinary
+// TODO:Create a separate cloudinary.config.js file in the backend folder and import it here
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+  })
+
+
 export const createPost = async (req, res) => {
     try {
         const {text} = req.body;
@@ -13,11 +23,22 @@ export const createPost = async (req, res) => {
         const user = await User.findById(userId);
         if(!user) return res.status(400).json({message: "User not found"});
         if(!text && !img) return res.status(400).json({message: "Text or image is required"});
-
-        if(img) {
-            const uploadedResponse = await cloudinary.uploader.upload(img);
-            img = uploadedResponse.secure_url;
-        }
+        
+        if (img) {
+            try {
+              console.log("1here is the issue");
+              const uploadedResponse = await cloudinary.uploader.upload(img);
+              if (uploadedResponse) {
+                console.log("2here is the issue");
+                img = uploadedResponse.secure_url;
+                console.log("Image uploaded successfully in post controller");
+              }
+            } catch (error) {
+              console.error("Error uploading image to Cloudinary:", error);
+              throw new Error("Failed to upload image. Please try again later.");
+            }
+          }
+          
 
         const newPost = new Post ({
             user: userId,

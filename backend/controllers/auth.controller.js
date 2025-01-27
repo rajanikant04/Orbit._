@@ -43,7 +43,7 @@ export const signup = async (req, res) =>{
 
 			generateTokenAndSetCookie(newUser._id, res);
 			await newUser.save();
-
+			// console.log("user created.")
 			res.status(201).json({
 				_id: newUser._id,
 				fullName: newUser.fullName,
@@ -72,7 +72,7 @@ export const login = async (req, res) =>{
 		if (!user || !isPasswordCorrect) {
 			return res.status(400).json({ error: "Invalid username or password" });
 		}
-
+		
 		generateTokenAndSetCookie(user._id, res);
 
 		console.log("Login successfully")
