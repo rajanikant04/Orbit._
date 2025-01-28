@@ -43,11 +43,6 @@ const ProfilePage = () => {
     }
   })
   
-
-  // TODO: here is a issue of user.. we are not getting the user directly.. we are getting the user object and inside that object there is one more user object and we can access our data through the inside user object... it need to be modified
-  // console.log((user));
-  // const createdAt = user.createdAt;
-  // console.log(user.user.createdAt)
   
   const memberSinceDate = formatMemberSinceDate(user?.createdAt)
 
