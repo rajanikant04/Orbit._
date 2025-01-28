@@ -59,7 +59,6 @@ const CreatePost = () => {
 		if (file) {
 			const reader = new FileReader();
 			reader.onload = () => {
-				console.log("Image loaded in fronted:", reader.result); 
 				setImg(reader.result);
 			};
 			reader.readAsDataURL(file);

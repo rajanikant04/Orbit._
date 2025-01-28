@@ -26,10 +26,8 @@ export const createPost = async (req, res) => {
         
         if (img) {
             try {
-              console.log("1here is the issue");
               const uploadedResponse = await cloudinary.uploader.upload(img);
               if (uploadedResponse) {
-                console.log("2here is the issue");
                 img = uploadedResponse.secure_url;
                 console.log("Image uploaded successfully in post controller");
               }
