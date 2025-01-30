@@ -6,11 +6,6 @@ import {v2 as cloudinary} from 'cloudinary';
 // Initialize Cloudinary
 // this may create a big issue in uploading to cloudinary
 // TODO:Create a separate cloudinary.config.js file in the backend folder and import it here
-cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET
-  })
 
 
 export const createPost = async (req, res) => {
