@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 import { BiLogOut } from "react-icons/bi";
 import {
   useMutation,
-  useQueries,
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
