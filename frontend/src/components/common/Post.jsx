@@ -40,8 +40,6 @@ const Post = ({ post }) => {
 	const postOwner = post.user;
 	const isLiked = false;
 
-	console.log(authUser._id);
-	
 	const isMyPost = authUser?._id === postOwner?._id;
 
 	const formattedDate = "1h";
