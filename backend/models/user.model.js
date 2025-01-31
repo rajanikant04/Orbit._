@@ -58,6 +58,7 @@ const userSchema = new mongoose.Schema(
 				default: [],
 			},
 		],
+		// TODO: add post to this model, so that we can count the posts of a user
 	},
 	{ timestamps: true }
 );

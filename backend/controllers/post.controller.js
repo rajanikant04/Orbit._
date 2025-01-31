@@ -140,7 +140,8 @@ export const likeUnlikePost = async (req, res) => {
             })
             await notification.save();
             console.log("post liked in post.controller");
-            res.status(200).json(post.likes);
+            const updatedLikes = post.likes;
+			res.status(200).json(updatedLikes);
         }
 
     } catch (error) {
