@@ -50,7 +50,7 @@ const Sidebar = () => {
               className="w-10 h-10 rounded-xl transform transition-transform group-hover:scale-105" 
               alt="Orbit"
             />
-            <span className="hidden lg:block text-xl font-bold text-premium">Orbit</span>
+            <span className="hidden lg:block text-xl font-bold" style={{ color: 'var(--text-primary)' }}>Orbit</span>
           </div>
         </Link>
 
@@ -58,7 +58,8 @@ const Sidebar = () => {
         <nav className="flex-1 space-y-2">
           <Link
             to="/"
-            className="flex items-center justify-center lg:justify-start space-x-4 p-3 lg:p-4 rounded-xl text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200 group"
+            className="nav-link flex items-center justify-center lg:justify-start space-x-4 p-3 lg:p-4 rounded-xl transition-all duration-200 group"
+            style={{ color: 'var(--text-secondary)' }}
           >
             <MdHomeFilled className="w-6 h-6 group-hover:scale-110 transition-transform" />
             <span className="hidden lg:block font-medium">Home</span>
@@ -66,7 +67,8 @@ const Sidebar = () => {
 
           <Link
             to="/notifications"
-            className="flex items-center justify-center lg:justify-start space-x-4 p-3 lg:p-4 rounded-xl text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200 group"
+            className="nav-link flex items-center justify-center lg:justify-start space-x-4 p-3 lg:p-4 rounded-xl transition-all duration-200 group"
+            style={{ color: 'var(--text-secondary)' }}
           >
             <IoNotifications className="w-6 h-6 group-hover:scale-110 transition-transform" />
             <span className="hidden lg:block font-medium">Notifications</span>
@@ -74,7 +76,8 @@ const Sidebar = () => {
 
           <Link
             to={`/profile/${authUser?.username}`}
-            className="flex items-center justify-center lg:justify-start space-x-4 p-3 lg:p-4 rounded-xl text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200 group"
+            className="nav-link flex items-center justify-center lg:justify-start space-x-4 p-3 lg:p-4 rounded-xl transition-all duration-200 group"
+            style={{ color: 'var(--text-secondary)' }}
           >
             <FaUser className="w-6 h-6 group-hover:scale-110 transition-transform" />
             <span className="hidden lg:block font-medium">Profile</span>
@@ -83,7 +86,7 @@ const Sidebar = () => {
           {/* Theme Toggle */}
           <div className="flex items-center justify-center lg:justify-start space-x-4 p-3 lg:p-4">
             <ThemeToggle />
-            <span className="hidden lg:block font-medium text-white/60">Theme</span>
+            <span className="hidden lg:block font-medium" style={{ color: 'var(--text-tertiary)' }}>Theme</span>
           </div>
         </nav>
 
@@ -105,10 +108,10 @@ const Sidebar = () => {
               
               <div className="hidden lg:flex flex-1 items-center justify-between">
                 <div className="flex-1 min-w-0">
-                  <p className="text-white font-semibold text-sm truncate">
+                  <p className="font-semibold text-sm truncate" style={{ color: 'var(--text-primary)' }}>
                     {authUser?.fullName}
                   </p>
-                  <p className="text-white/60 text-xs truncate">
+                  <p className="text-xs truncate" style={{ color: 'var(--text-tertiary)' }}>
                     @{authUser?.username}
                   </p>
                 </div>
@@ -121,7 +124,7 @@ const Sidebar = () => {
                   className="ml-3 p-2 rounded-lg hover:bg-white/10 transition-colors duration-200 group/btn"
                   title="Logout"
                 >
-                  <BiLogOut className="w-5 h-5 text-white/60 group-hover/btn:text-white transition-colors" />
+                  <BiLogOut className="w-5 h-5 group-hover/btn:opacity-100 transition-colors" style={{ color: 'var(--text-tertiary)' }} />
                 </button>
               </div>
 

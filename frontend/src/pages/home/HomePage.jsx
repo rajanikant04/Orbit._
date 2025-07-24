@@ -9,14 +9,21 @@ const HomePage = () => {
 	return (
 		<div className='min-h-screen'>
 			{/* Header */}
-			<div className='sticky top-0 z-10 bg-black/80 backdrop-blur-xl border-b border-white/12'>
+			<div className='sticky top-0 z-10 backdrop-blur-xl border-b transition-colors duration-300' 
+				 style={{ 
+					 background: 'var(--bg-elevated)', 
+					 borderColor: 'var(--border-primary)' 
+				 }}>
 				<div className='flex'>
 					<button
-						className={`flex-1 py-4 px-6 text-center font-medium transition-all duration-200 relative ${
+						className={`flex-1 py-4 px-6 text-center font-medium transition-all duration-200 relative hover:bg-white/5 ${
 							feedType === "forYou" 
-								? "text-white" 
-								: "text-white/60 hover:text-white hover:bg-white/5"
+								? "" 
+								: "hover:bg-white/5"
 						}`}
+						style={{ 
+							color: feedType === "forYou" ? 'var(--text-primary)' : 'var(--text-secondary)' 
+						}}
 						onClick={() => setFeedType("forYou")}
 					>
 						For you
@@ -25,11 +32,14 @@ const HomePage = () => {
 						)}
 					</button>
 					<button
-						className={`flex-1 py-4 px-6 text-center font-medium transition-all duration-200 relative ${
+						className={`flex-1 py-4 px-6 text-center font-medium transition-all duration-200 relative hover:bg-white/5 ${
 							feedType === "following" 
-								? "text-white" 
-								: "text-white/60 hover:text-white hover:bg-white/5"
+								? "" 
+								: "hover:bg-white/5"
 						}`}
+						style={{ 
+							color: feedType === "following" ? 'var(--text-primary)' : 'var(--text-secondary)' 
+						}}
 						onClick={() => setFeedType("following")}
 					>
 						Following

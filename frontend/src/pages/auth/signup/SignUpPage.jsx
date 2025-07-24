@@ -5,6 +5,10 @@ import { MdOutlineMail } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import { MdPassword } from "react-icons/md";
 import { MdDriveFileRenameOutline } from "react-icons/md";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import toast from "react-hot-toast";
+import ThemeToggle from "../../../components/ui/ThemeToggle";
+import { MdDriveFileRenameOutline } from "react-icons/md";
 import { useMutation, useQueryClient  } from "@tanstack/react-query";
 import { toast } from "react-hot-toast"
 
@@ -56,31 +60,38 @@ const SignUpPage = () => {
 
 	return (
 		<div className='min-h-screen flex'>
+			{/* Theme Toggle - Fixed position */}
+			<div className="fixed top-4 right-4 z-50">
+				<ThemeToggle />
+			</div>
+			
 			{/* Left side - Branding */}
-			<div className='hidden lg:flex lg:flex-1 bg-gradient-to-br from-black via-gray-900 to-black items-center justify-center relative overflow-hidden'>
+			<div className='hidden lg:flex lg:flex-1 items-center justify-center relative overflow-hidden transition-colors duration-300' 
+				 style={{ background: 'var(--bg-secondary)' }}>
 				<div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-900/20 via-transparent to-transparent"></div>
 				<div className="relative z-10 text-center px-12">
 					<img src="/orbit.png" className='w-32 h-32 mx-auto mb-8 drop-shadow-2xl' alt="Orbit" />
-					<h1 className="text-4xl font-bold text-premium mb-4">Join Orbit Today</h1>
-					<p className="text-xl text-white/60 max-w-md">Be part of the conversation and connect with people around the world.</p>
+					<h1 className="text-4xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Join Orbit Today</h1>
+					<p className="text-xl max-w-md" style={{ color: 'var(--text-secondary)' }}>Be part of the conversation and connect with people around the world.</p>
 				</div>
 			</div>
 
 			{/* Right side - Sign Up Form */}
-			<div className='flex-1 flex items-center justify-center px-6 lg:px-12 bg-black relative'>
+			<div className='flex-1 flex items-center justify-center px-6 lg:px-12 relative transition-colors duration-300' 
+				 style={{ background: 'var(--bg-primary)' }}>
 				<div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-900/10 via-transparent to-transparent"></div>
 				
 				<div className='w-full max-w-md relative z-10'>
 					{/* Mobile logo */}
 					<div className="lg:hidden text-center mb-12">
 						<img src="/orbit.png" className='w-20 h-20 mx-auto mb-4' alt="Orbit" />
-						<h1 className="text-2xl font-bold text-premium">Create account</h1>
+						<h1 className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>Create account</h1>
 					</div>
 
 					{/* Desktop heading */}
 					<div className="hidden lg:block mb-12">
-						<h1 className='text-4xl font-bold text-premium mb-2'>Create your account</h1>
-						<p className="text-white/60">Join thousands of users sharing their thoughts</p>
+						<h1 className='text-4xl font-bold mb-2' style={{ color: 'var(--text-primary)' }}>Create your account</h1>
+						<p style={{ color: 'var(--text-secondary)' }}>Join thousands of users sharing their thoughts</p>
 					</div>
 
 					<form className='space-y-6' onSubmit={handleSubmit}>

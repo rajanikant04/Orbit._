@@ -37,10 +37,10 @@ function App() {
   if(isLoading) {
     return(
       <ThemeProvider>
-        <div className='min-h-screen flex justify-center items-center bg-gradient-to-br from-gray-900 via-black to-gray-900'>
+        <div className='min-h-screen flex justify-center items-center' style={{ background: 'var(--bg-primary)' }}>
           <div className="flex flex-col items-center space-y-4">
             <LoadingSpinner size='lg' />
-            <div className="text-white/60 text-sm font-medium">Loading Orbit...</div>
+            <div style={{ color: 'var(--text-secondary)' }} className="text-sm font-medium">Loading Orbit...</div>
           </div>
         </div>
       </ThemeProvider>
@@ -49,13 +49,13 @@ function App() {
 
   return (
     <ThemeProvider>
-      <div className='min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50 dark:bg-gradient-to-br dark:from-gray-900 dark:via-black dark:to-gray-900 transition-colors duration-300'>
+      <div className='min-h-screen transition-colors duration-300' style={{ background: 'var(--bg-primary)' }}>
         <div className='flex max-w-7xl mx-auto relative'>
           {/* Sidebar */}
           {authUser && <Sidebar />}
           
           {/* Main Content */}
-          <main className={`flex-1 ${authUser ? 'max-w-2xl' : 'w-full'} border-x border-gray-200/50 dark:border-white/12 transition-colors duration-300`}>
+          <main className={`flex-1 ${authUser ? 'max-w-2xl' : 'w-full'} border-x transition-colors duration-300`} style={{ borderColor: 'var(--border-primary)' }}>
             <Routes>
               <Route path='/' element={authUser ? <HomePage /> : <Navigate to="/login" /> } />
               <Route path='/login' element={!authUser ? <LoginPage /> : <Navigate to="/" />} />

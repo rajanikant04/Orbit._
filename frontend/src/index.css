@@ -252,3 +252,26 @@ body {
 .avatar img {
   border-radius: var(--radius-lg);
 }
+
+/* Enhanced hover states for theme compatibility */
+.nav-link {
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+  color: var(--text-primary) !important;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.light-theme .nav-link:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* Theme-aware utilities */
+.theme-bg-primary { background: var(--bg-primary); }
+.theme-bg-secondary { background: var(--bg-secondary); }
+.theme-bg-elevated { background: var(--bg-elevated); }
+.theme-text-primary { color: var(--text-primary); }
+.theme-text-secondary { color: var(--text-secondary); }
+.theme-text-tertiary { color: var(--text-tertiary); }
+.theme-border-primary { border-color: var(--border-primary); }
