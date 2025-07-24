@@ -35,25 +35,49 @@ function App() {
 
   if(isLoading) {
     return(
-      <div className='h-screen flex justify-center items-center'>
-        <LoadingSpinner size='lg' />
+      <div className='min-h-screen flex justify-center items-center bg-black'>
+        <div className="flex flex-col items-center space-y-4">
+          <LoadingSpinner size='lg' />
+          <div className="text-white/60 text-sm font-medium">Loading Orbit...</div>
+        </div>
       </div>
     )
   }
 
   return (
-    <div className='flex max-w-6xl mx-auto'>
-      {/* common component */}
-      {authUser && <Sidebar />}
-      <Routes>
-				<Route path='/' element={authUser ? <HomePage /> : <Navigate to="/login" /> } />
-				<Route path='/login' element={!authUser ? <LoginPage /> : <Navigate to="/" />} />
-				<Route path='/signup' element={!authUser ? <SignUpPage /> : <Navigate to="/" />} />
-				<Route path='/notifications' element={authUser ? <NotificationPage /> : <Navigate to="/login" />} />
-				<Route path='/profile/:username' element={authUser ? <ProfilePage /> : <Navigate to="/login" /> } />
-      </Routes>
-      {authUser && <RightPanel />}
-      <Toaster />
+    <div className='min-h-screen bg-black'>
+      <div className='flex max-w-7xl mx-auto relative'>
+        {/* Sidebar */}
+        {authUser && <Sidebar />}
+        
+        {/* Main Content */}
+        <main className={`flex-1 ${authUser ? 'max-w-2xl' : 'w-full'} border-x border-white/8`}>
+          <Routes>
+            <Route path='/' element={authUser ? <HomePage /> : <Navigate to="/login" /> } />
+            <Route path='/login' element={!authUser ? <LoginPage /> : <Navigate to="/" />} />
+            <Route path='/signup' element={!authUser ? <SignUpPage /> : <Navigate to="/" />} />
+            <Route path='/notifications' element={authUser ? <NotificationPage /> : <Navigate to="/login" />} />
+            <Route path='/profile/:username' element={authUser ? <ProfilePage /> : <Navigate to="/login" /> } />
+          </Routes>
+        </main>
+        
+        {/* Right Panel */}
+        {authUser && <RightPanel />}
+        
+        {/* Toast Notifications */}
+        <Toaster 
+          position="bottom-center"
+          toastOptions={{
+            style: {
+              background: 'rgba(30, 30, 30, 0.95)',
+              color: '#ffffff',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              borderRadius: '12px',
+              backdropFilter: 'blur(20px)',
+            },
+          }}
+        />
+      </div>
     </div>
   )
 }

@@ -39,67 +39,98 @@ const Sidebar = () => {
   const { data: authUser } = useQuery({ queryKey: ["authUser"] });
 
   return (
-    <div className="md:flex-[2_2_0] w-18 max-w-52">
-      <div className="sticky top-0 left-0 h-screen flex flex-col border-r border-gray-700 w-20 md:w-full">
-        <Link to="/" className="flex justify-center md:justify-start">
-          <img src="/orbit.png" className="px-2 h-15 rounded-full fill-white hover:bg-stone-900" />
+    <div className="w-20 lg:w-72 flex-shrink-0">
+      <div className="fixed h-screen w-20 lg:w-72 flex flex-col p-4 lg:p-6">
+        {/* Logo */}
+        <Link to="/" className="flex items-center justify-center lg:justify-start mb-8 group">
+          <div className="flex items-center space-x-3">
+            <img 
+              src="/orbit.png" 
+              className="w-10 h-10 rounded-xl transform transition-transform group-hover:scale-105" 
+              alt="Orbit"
+            />
+            <span className="hidden lg:block text-xl font-bold text-premium">Orbit</span>
+          </div>
         </Link>
-        <ul className="flex flex-col gap-3 mt-4">
-          <li className="flex justify-center md:justify-start">
-            <Link
-              to="/"
-              className="flex gap-3 items-center hover:bg-stone-900 transition-all rounded-full duration-300 py-2 pl-2 pr-4 max-w-fit cursor-pointer"
-            >
-              <MdHomeFilled className="w-8 h-8" />
-              <span className="text-lg hidden md:block">Home</span>
-            </Link>
-          </li>
-          <li className="flex justify-center md:justify-start">
-            <Link
-              to="/notifications"
-              className="flex gap-3 items-center hover:bg-stone-900 transition-all rounded-full duration-300 py-2 pl-2 pr-4 max-w-fit cursor-pointer"
-            >
-              <IoNotifications className="w-6 h-6" />
-              <span className="text-lg hidden md:block">Notifications</span>
-            </Link>
-          </li>
 
-          <li className="flex justify-center md:justify-start">
-            <Link
-              to={`/profile/${authUser?.username}`}
-              className="flex gap-3 items-center hover:bg-stone-900 transition-all rounded-full duration-300 py-2 pl-2 pr-4 max-w-fit cursor-pointer"
-            >
-              <FaUser className="w-6 h-6" />
-              <span className="text-lg hidden md:block">Profile</span>
-            </Link>
-          </li>
-        </ul>
-        {authUser && (
+        {/* Navigation */}
+        <nav className="flex-1 space-y-2">
           <Link
-            to={`/profile/${authUser.username}`}
-            className="mt-auto mb-10 flex gap-2 items-start transition-all duration-300 hover:bg-[#181818] py-2 px-4 rounded-full"
+            to="/"
+            className="flex items-center justify-center lg:justify-start space-x-4 p-3 lg:p-4 rounded-xl text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200 group"
           >
-            <div className="avatar hidden md:inline-flex">
-              <div className="w-8 rounded-full">
-                <img src={authUser?.profileImg || "/avatar-placeholder.png"} />
+            <MdHomeFilled className="w-6 h-6 group-hover:scale-110 transition-transform" />
+            <span className="hidden lg:block font-medium">Home</span>
+          </Link>
+
+          <Link
+            to="/notifications"
+            className="flex items-center justify-center lg:justify-start space-x-4 p-3 lg:p-4 rounded-xl text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200 group"
+          >
+            <IoNotifications className="w-6 h-6 group-hover:scale-110 transition-transform" />
+            <span className="hidden lg:block font-medium">Notifications</span>
+          </Link>
+
+          <Link
+            to={`/profile/${authUser?.username}`}
+            className="flex items-center justify-center lg:justify-start space-x-4 p-3 lg:p-4 rounded-xl text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200 group"
+          >
+            <FaUser className="w-6 h-6 group-hover:scale-110 transition-transform" />
+            <span className="hidden lg:block font-medium">Profile</span>
+          </Link>
+        </nav>
+
+        {/* User Profile */}
+        {authUser && (
+          <div className="mt-auto">
+            <Link
+              to={`/profile/${authUser.username}`}
+              className="flex items-center justify-center lg:justify-start space-x-3 p-3 lg:p-4 rounded-xl hover:bg-white/5 transition-all duration-200 group relative"
+            >
+              <div className="relative">
+                <img 
+                  src={authUser?.profileImg || "/avatar-placeholder.png"} 
+                  className="w-10 h-10 rounded-xl object-cover ring-2 ring-white/10 group-hover:ring-white/20 transition-all duration-200"
+                  alt={authUser?.fullName}
+                />
+                <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-black"></div>
               </div>
-            </div>
-            <div className="flex justify-between flex-1">
-              <div className="hidden md:block">
-                <p className="text-white font-bold text-sm w-20 truncate">
-                  {authUser?.fullName}
-                </p>
-                <p className="text-slate-500 text-sm">@{authUser?.username}</p>
+              
+              <div className="hidden lg:flex flex-1 items-center justify-between">
+                <div className="flex-1 min-w-0">
+                  <p className="text-white font-semibold text-sm truncate">
+                    {authUser?.fullName}
+                  </p>
+                  <p className="text-white/60 text-xs truncate">
+                    @{authUser?.username}
+                  </p>
+                </div>
+                
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    logout();
+                  }}
+                  className="ml-3 p-2 rounded-lg hover:bg-white/10 transition-colors duration-200 group/btn"
+                  title="Logout"
+                >
+                  <BiLogOut className="w-5 h-5 text-white/60 group-hover/btn:text-white transition-colors" />
+                </button>
               </div>
-              <BiLogOut
-                className="w-5 h-5 cursor-pointer"
+
+              {/* Mobile logout button */}
+              <button
                 onClick={(e) => {
                   e.preventDefault();
                   logout();
                 }}
-              />
-            </div>
-          </Link>
+                className="lg:hidden absolute -top-2 -right-2 p-1.5 bg-red-500 rounded-full hover:bg-red-600 transition-colors duration-200"
+                title="Logout"
+              >
+                <BiLogOut className="w-4 h-4 text-white" />
+              </button>
+            </Link>
+          </div>
         )}
       </div>
     </div>

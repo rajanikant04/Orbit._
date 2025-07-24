@@ -59,47 +59,89 @@ const CreatePost = () => {
 	};
 
 	return (
-		<div className='flex p-4 items-start gap-4 border-b border-gray-700'>
-			<div className='avatar'>
-				<div className='w-8 rounded-full'>
-					<img src={authUser.profileImg || "/avatar-placeholder.png"} />
+		<div className='border-b border-white/8 p-6'>
+			<div className='flex space-x-4'>
+				<div className='flex-shrink-0'>
+					<img 
+						src={authUser.profileImg || "/avatar-placeholder.png"} 
+						className='w-12 h-12 rounded-xl object-cover ring-2 ring-white/10'
+						alt={authUser.fullName}
+					/>
 				</div>
-			</div>
-			<form className='flex flex-col gap-2 w-full' onSubmit={handleSubmit}>
-				<textarea
-					className='textarea w-full p-0 text-lg resize-none border-none focus:outline-none  border-gray-800'
-					placeholder='What is happening?!'
-					value={text}
-					onChange={(e) => setText(e.target.value)}
-				/>
-				{img && (
-					<div className='relative w-72 mx-auto'>
-						<IoCloseSharp
-							className='absolute top-0 right-0 text-white bg-gray-800 rounded-full w-5 h-5 cursor-pointer'
-							onClick={() => {
-								setImg(null);
-								imgRef.current.value = null;
-							}}
+				
+				<form className='flex-1' onSubmit={handleSubmit}>
+					<div className="space-y-4">
+						<textarea
+							className='w-full bg-transparent text-xl placeholder-white/40 resize-none border-none focus:outline-none min-h-[120px] leading-relaxed'
+							placeholder="What's on your mind?"
+							value={text}
+							onChange={(e) => setText(e.target.value)}
+							rows={3}
 						/>
-						<img src={img} className='w-full mx-auto h-72 object-contain rounded' />
+						
+						{img && (
+							<div className='relative inline-block'>
+								<img 
+									src={img} 
+									className='max-h-80 rounded-2xl border border-white/10 object-cover' 
+									alt="Upload preview"
+								/>
+								<button
+									type="button"
+									className='absolute top-3 right-3 w-8 h-8 bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-black/90 transition-colors'
+									onClick={() => {
+										setImg(null);
+										imgRef.current.value = null;
+									}}
+								>
+									<IoCloseSharp className='w-5 h-5 text-white' />
+								</button>
+							</div>
+						)}
 					</div>
-				)}
 
-				<div className='flex justify-between border-t py-2 border-t-gray-700'>
-					<div className='flex gap-1 items-center'>
-						<CiImageOn
-							className='fill-primary w-6 h-6 cursor-pointer'
-							onClick={() => imgRef.current.click()}
-						/>
-						<BsEmojiSmileFill className='fill-primary w-5 h-5 cursor-pointer' />
+					<div className='flex items-center justify-between pt-4 border-t border-white/8 mt-4'>
+						<div className='flex items-center space-x-4'>
+							<button
+								type="button"
+								className='flex items-center justify-center w-10 h-10 rounded-xl hover:bg-blue-500/10 text-blue-500 hover:text-blue-400 transition-all duration-200 group'
+								onClick={() => imgRef.current.click()}
+							>
+								<CiImageOn className='w-6 h-6 group-hover:scale-110 transition-transform' />
+							</button>
+							<button
+								type="button"
+								className='flex items-center justify-center w-10 h-10 rounded-xl hover:bg-yellow-500/10 text-yellow-500 hover:text-yellow-400 transition-all duration-200 group'
+							>
+								<BsEmojiSmileFill className='w-5 h-5 group-hover:scale-110 transition-transform' />
+							</button>
+						</div>
+
+						<button 
+							type="submit"
+							disabled={isPending || (!text.trim() && !img)}
+							className='px-6 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold rounded-xl transition-all duration-200 transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none'
+						>
+							{isPending ? (
+								<div className="flex items-center space-x-2">
+									<div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
+									<span>Posting...</span>
+								</div>
+							) : (
+								'Post'
+							)}
+						</button>
 					</div>
-					<input type='file' accept="image/*" hidden ref={imgRef} onChange={handleImgChange} />
-					<button className='btn btn-primary rounded-full btn-sm text-white px-4'>
-						{isPending ? "Posting..." : "Post"}
-					</button>
-				</div>
-				{isError && <div className="text-red-500">{error.message}</div>}
-			</form>
+
+					<input 
+						type='file' 
+						accept="image/*" 
+						hidden 
+						ref={imgRef} 
+						onChange={handleImgChange} 
+					/>
+				</form>
+			</div>
 		</div>
 	);
 };
