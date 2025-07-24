@@ -59,7 +59,7 @@ const CreatePost = () => {
 	};
 
 	return (
-		<div className='border-b border-white/8 p-6'>
+		<div className='border-b border-white/12 p-6'>
 			<div className='flex space-x-4'>
 				<div className='flex-shrink-0'>
 					<img 
@@ -100,7 +100,7 @@ const CreatePost = () => {
 						)}
 					</div>
 
-					<div className='flex items-center justify-between pt-4 border-t border-white/8 mt-4'>
+					<div className='flex items-center justify-between pt-4 border-t border-white/12 mt-4'>
 						<div className='flex items-center space-x-4'>
 							<button
 								type="button"

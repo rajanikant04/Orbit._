@@ -123,7 +123,7 @@ const Post = ({ post }) => {
 	};
 
 	return (
-		<article className='border-b border-white/8 p-6 hover:bg-white/[0.02] transition-colors duration-200'>
+		<article className='border-b border-white/12 p-6 hover:bg-white/[0.02] transition-colors duration-200'>
 			<div className='flex space-x-4'>
 				<Link to={`/profile/${postOwner?.username}`} className='flex-shrink-0'>
 					<img 
@@ -176,7 +176,7 @@ const Post = ({ post }) => {
 						)}
 						
 						{post?.img && (
-							<div className="rounded-2xl overflow-hidden border border-white/10">
+							<div className="rounded-2xl overflow-hidden border border-white/15">
 								<img
 									src={post.img}
 									className='w-full max-h-96 object-cover hover:scale-[1.02] transition-transform duration-300'
@@ -224,7 +224,7 @@ const Post = ({ post }) => {
 
 			{/* Comments Modal */}
 			<dialog id={`comments_modal${post?._id}`} className='modal'>
-				<div className='modal-box bg-black/95 backdrop-blur-xl border border-white/10 rounded-2xl max-w-2xl'>
+				<div className='modal-box bg-black/95 backdrop-blur-xl border border-white/15 rounded-2xl max-w-2xl'>
 					<h3 className='font-bold text-xl mb-6 text-white'>Comments</h3>
 					
 					<div className='max-h-80 overflow-y-auto space-y-4 mb-6 custom-scrollbar'>
@@ -254,7 +254,7 @@ const Post = ({ post }) => {
 						)}
 					</div>
 
-					<form onSubmit={handlePostComment} className='border-t border-white/10 pt-4'>
+					<form onSubmit={handlePostComment} className='border-t border-white/15 pt-4'>
 						<div className="flex space-x-4">
 							<img 
 								src={authUser?.profileImg || "/avatar-placeholder.png"} 
@@ -263,7 +263,7 @@ const Post = ({ post }) => {
 							/>
 							<div className="flex-1 space-y-4">
 								<textarea
-									className='w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white placeholder-white/40 resize-none focus:border-blue-500/50 focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all duration-200'
+									className='w-full bg-white/5 border border-white/15 rounded-xl p-4 text-white placeholder-white/40 resize-none focus:border-blue-500/50 focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all duration-200'
 									placeholder='Add a comment...'
 									value={comment}
 									onChange={(e) => setComment(e.target.value)}

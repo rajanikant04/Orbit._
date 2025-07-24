@@ -48,7 +48,7 @@ const NotificationPage = () => {
 	return (
 		<div className='min-h-screen'>
 			{/* Header */}
-			<div className='sticky top-0 z-10 bg-black/80 backdrop-blur-xl border-b border-white/8 p-6'>
+			<div className='sticky top-0 z-10 bg-black/80 backdrop-blur-xl border-b border-white/12 p-6'>
 				<div className='flex justify-between items-center'>
 					<h1 className='text-2xl font-bold text-premium'>Notifications</h1>
 					<div className='dropdown dropdown-end'>
@@ -60,7 +60,7 @@ const NotificationPage = () => {
 						</button>
 						<ul
 							tabIndex={0}
-							className='dropdown-content z-[1] menu p-2 shadow-xl bg-black/95 backdrop-blur-xl border border-white/10 rounded-xl w-56 mt-2'
+							className='dropdown-content z-[1] menu p-2 shadow-xl bg-black/95 backdrop-blur-xl border border-white/15 rounded-xl w-56 mt-2'
 						>
 							<li>
 								<button 

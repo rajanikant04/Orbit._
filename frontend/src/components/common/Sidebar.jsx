@@ -9,6 +9,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import ThemeToggle from "../ui/ThemeToggle";
 
 const Sidebar = () => {
   const queryClient = useQueryClient();
@@ -78,6 +79,12 @@ const Sidebar = () => {
             <FaUser className="w-6 h-6 group-hover:scale-110 transition-transform" />
             <span className="hidden lg:block font-medium">Profile</span>
           </Link>
+          
+          {/* Theme Toggle */}
+          <div className="flex items-center justify-center lg:justify-start space-x-4 p-3 lg:p-4">
+            <ThemeToggle />
+            <span className="hidden lg:block font-medium text-white/60">Theme</span>
+          </div>
         </nav>
 
         {/* User Profile */}

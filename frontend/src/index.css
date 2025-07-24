@@ -5,13 +5,13 @@
 
 /* Premium Design System Variables */
 :root {
-  /* Apple-inspired colors */
+  /* Dark theme colors (default) */
   --bg-primary: #000000;
   --bg-secondary: #1a1a1a;
   --bg-tertiary: #2a2a2a;
   --bg-elevated: #1e1e1e;
-  --border-primary: rgba(255, 255, 255, 0.08);
-  --border-secondary: rgba(255, 255, 255, 0.04);
+  --border-primary: rgba(255, 255, 255, 0.12);
+  --border-secondary: rgba(255, 255, 255, 0.08);
   --text-primary: #ffffff;
   --text-secondary: #a1a1a1;
   --text-tertiary: #6b6b6b;
@@ -41,6 +41,30 @@
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
   --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.25);
   --shadow-xl: 0 24px 64px rgba(0, 0, 0, 0.4);
+}
+
+/* Light theme colors */
+:root.light-theme {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --bg-tertiary: #e9ecef;
+  --bg-elevated: #ffffff;
+  --border-primary: rgba(0, 0, 0, 0.12);
+  --border-secondary: rgba(0, 0, 0, 0.08);
+  --text-primary: #000000;
+  --text-secondary: #495057;
+  --text-tertiary: #6c757d;
+  --accent-primary: #007aff;
+  --accent-hover: #0056cc;
+  --success: #28cd41;
+  --warning: #ff9500;
+  --error: #ff3b30;
+  
+  /* Light theme shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.15);
+  --shadow-xl: 0 24px 64px rgba(0, 0, 0, 0.2);
 }
 
 /* Base styles */
@@ -74,19 +98,46 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+/* Theme-specific utilities */
+.dark\:bg-primary { background: var(--bg-primary); }
+.dark\:bg-secondary { background: var(--bg-secondary); }
+.dark\:text-primary { color: var(--text-primary); }
+.dark\:text-secondary { color: var(--text-secondary); }
+.dark\:border-primary { border-color: var(--border-primary); }
+
+.light\:bg-primary { background: var(--bg-primary); }
+.light\:bg-secondary { background: var(--bg-secondary); }
+.light\:text-primary { color: var(--text-primary); }
+.light\:text-secondary { color: var(--text-secondary); }
+.light\:border-primary { border-color: var(--border-primary); }
 
 /* Glass morphism effect */
 .glass {
   background: rgba(255, 255, 255, 0.02);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-primary);
+  transition: all 0.3s ease;
+}
+
+.light-theme .glass {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid var(--border-primary);
 }
 
 .glass-elevated {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: var(--shadow-lg);
+  transition: all 0.3s ease;
+}
+
+.light-theme .glass-elevated {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid var(--border-primary);
   box-shadow: var(--shadow-lg);
 }
 
@@ -146,6 +197,8 @@ body {
   font-weight: 500;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   border: none;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
 }
 
 .btn:hover {
@@ -155,6 +208,7 @@ body {
 .btn-primary {
   background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-hover) 100%);
   box-shadow: var(--shadow-md);
+  color: white;
 }
 
 .btn-primary:hover {
@@ -162,23 +216,28 @@ body {
 }
 
 .input, .textarea {
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--bg-secondary);
   border: 1px solid var(--border-primary);
   border-radius: var(--radius-lg);
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   backdrop-filter: blur(10px);
+  color: var(--text-primary);
+}
+
+.input::placeholder, .textarea::placeholder {
+  color: var(--text-tertiary);
 }
 
 .input:focus, .textarea:focus {
-  border-color: rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--accent-primary);
+  background: var(--bg-elevated);
   outline: none;
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+  box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2);
 }
 
 .input:hover, .textarea:hover {
-  border-color: rgba(255, 255, 255, 0.15);
-  background: rgba(255, 255, 255, 0.02);
+  border-color: var(--border-secondary);
+  background: var(--bg-elevated);
 }
 
 .modal-box {
@@ -186,6 +245,8 @@ body {
   border: 1px solid var(--border-primary);
   border-radius: var(--radius-xl);
   backdrop-filter: blur(20px);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
 }
 
 .avatar img {

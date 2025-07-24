@@ -9,7 +9,7 @@ const HomePage = () => {
 	return (
 		<div className='min-h-screen'>
 			{/* Header */}
-			<div className='sticky top-0 z-10 bg-black/80 backdrop-blur-xl border-b border-white/8'>
+			<div className='sticky top-0 z-10 bg-black/80 backdrop-blur-xl border-b border-white/12'>
 				<div className='flex'>
 					<button
 						className={`flex-1 py-4 px-6 text-center font-medium transition-all duration-200 relative ${
