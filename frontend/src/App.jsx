@@ -42,18 +42,30 @@ function App() {
   }
 
   return (
-    <div className='flex max-w-6xl mx-auto'>
-      {/* common component */}
-      {authUser && <Sidebar />}
-      <Routes>
-				<Route path='/' element={authUser ? <HomePage /> : <Navigate to="/login" /> } />
-				<Route path='/login' element={!authUser ? <LoginPage /> : <Navigate to="/" />} />
-				<Route path='/signup' element={!authUser ? <SignUpPage /> : <Navigate to="/" />} />
-				<Route path='/notifications' element={authUser ? <NotificationPage /> : <Navigate to="/login" />} />
-				<Route path='/profile/:username' element={authUser ? <ProfilePage /> : <Navigate to="/login" /> } />
-      </Routes>
-      {authUser && <RightPanel />}
-      <Toaster />
+    <div className='min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900'>
+      <div className='flex max-w-6xl mx-auto backdrop-blur-sm'>
+        {/* common component */}
+        {authUser && <Sidebar />}
+        <Routes>
+          <Route path='/' element={authUser ? <HomePage /> : <Navigate to="/login" /> } />
+          <Route path='/login' element={!authUser ? <LoginPage /> : <Navigate to="/" />} />
+          <Route path='/signup' element={!authUser ? <SignUpPage /> : <Navigate to="/" />} />
+          <Route path='/notifications' element={authUser ? <NotificationPage /> : <Navigate to="/login" />} />
+          <Route path='/profile/:username' element={authUser ? <ProfilePage /> : <Navigate to="/login" /> } />
+        </Routes>
+        {authUser && <RightPanel />}
+        <Toaster 
+          toastOptions={{
+            className: '',
+            style: {
+              background: '#1e293b',
+              color: '#fff',
+              border: '1px solid #334155',
+              borderRadius: '12px',
+            },
+          }}
+        />
+      </div>
     </div>
   )
 }

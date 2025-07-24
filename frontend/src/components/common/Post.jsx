@@ -124,95 +124,108 @@ const Post = ({ post }) => {
 
 	return (
 		<>
-			<div className='flex gap-2 items-start p-4 border-b border-gray-700'>
-				<div className='avatar'>
-					<Link to={`/profile/${postOwner?.username}`} className='w-8 rounded-full overflow-hidden'>
+			<div className='flex gap-4 items-start p-6 border-b border-slate-700/50 bg-slate-900/20 hover:bg-slate-800/30 transition-colors duration-200'>
+				<div className='avatar flex-shrink-0'>
+					<Link to={`/profile/${postOwner?.username}`} className='w-12 h-12 rounded-full overflow-hidden ring-2 ring-slate-700 hover:ring-blue-500/50 transition-all duration-200'>
 						<img src={postOwner?.profileImg || "/avatar-placeholder.png"} />
 					</Link>
 				</div>
 				<div className='flex flex-col flex-1'>
-					<div className='flex gap-2 items-center'>
-						<Link to={`/profile/${postOwner?.username}`} className='font-bold'>
+					<div className='flex gap-2 items-center mb-2'>
+						<Link to={`/profile/${postOwner?.username}`} className='font-bold text-white hover:text-blue-300 transition-colors duration-200'>
 							{postOwner?.fullName}
 						</Link>
-						<span className='text-gray-700 flex gap-1 text-sm'>
-							<Link to={`/profile/${postOwner?.username}`}>@{postOwner?.username}</Link>
+						<span className='text-slate-400 flex gap-1 text-sm'>
+							<Link to={`/profile/${postOwner?.username}`} className='hover:text-slate-300 transition-colors duration-200'>@{postOwner?.username}</Link>
 							<span>·</span>
 							<span>{formattedDate}</span>
 						</span>
 						{isMyPost && (
 							<span className='flex justify-end flex-1'>
-								{!isDeleting && <FaTrash className='cursor-pointer hover:text-red-500' onClick={handleDeletePost} />}
+								{!isDeleting && (
+									<button
+										onClick={handleDeletePost}
+										className='p-2 rounded-full hover:bg-red-500/20 text-slate-400 hover:text-red-400 transition-all duration-200'
+									>
+										<FaTrash className='w-4 h-4' />
+									</button>
+								)}
 								{isDeleting && (
-									<LoadingSpinner size="sm"/>
+									<div className='p-2'>
+										<LoadingSpinner size="sm"/>
+									</div>
 								)}
 							</span>
 						)}
 					</div>
-					<div className='flex flex-col gap-3 overflow-hidden'>
-						<span>{post?.text}</span>
+					<div className='flex flex-col gap-4 overflow-hidden'>
+						<span className='text-white leading-relaxed'>{post?.text}</span>
 						{post?.img && (
 							<img
 								src={post?.img}
-								className='h-80 object-contain rounded-lg border border-gray-700'
+								className='max-h-96 object-cover rounded-xl border border-slate-600/50 shadow-lg'
 								alt=''
 							/>
 						)}
 					</div>
-					<div className='flex justify-between mt-3'>
-						<div className='flex gap-4 items-center w-2/3 justify-between'>
+					<div className='flex justify-between mt-4 pt-3 border-t border-slate-700/30'>
+						<div className='flex gap-6 items-center'>
 							<div
-								className='flex gap-1 items-center cursor-pointer group'
+								className='flex gap-2 items-center cursor-pointer group p-2 rounded-full hover:bg-blue-500/10 transition-all duration-200'
 								onClick={() => document.getElementById("comments_modal" + post?._id).showModal()}
 							>
-								<FaRegComment className='w-4 h-4  text-slate-500 group-hover:text-sky-400' />
-								<span className='text-sm text-slate-500 group-hover:text-sky-400'>
+								<FaRegComment className='w-4 h-4 text-slate-400 group-hover:text-blue-400 transition-colors duration-200' />
+								<span className='text-sm text-slate-400 group-hover:text-blue-400 transition-colors duration-200'>
 									{post?.comments?.length}
 								</span>
 							</div>
-							{/* We're using Modal Component from DaisyUI */}
+							{/* Enhanced Modal Component */}
 							<dialog id={`comments_modal${post?._id}`} className='modal border-none outline-none'>
-								<div className='modal-box rounded border border-gray-600'>
-									<h3 className='font-bold text-lg mb-4'>COMMENTS</h3>
-									<div className='flex flex-col gap-3 max-h-60 overflow-auto'>
+								<div className='modal-box bg-slate-800 border border-slate-600 rounded-2xl shadow-2xl'>
+									<h3 className='font-bold text-xl mb-6 text-white'>Comments</h3>
+									<div className='flex flex-col gap-4 max-h-80 overflow-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-800'>
 										{post?.comments?.length === 0 && (
-											<p className='text-sm text-slate-500'>
-												No comments yet 🤔 Be the first one 😉
+											<p className='text-slate-400 text-center py-8'>
+												No comments yet 💭 Be the first one to comment!
 											</p>
 										)}
 										{post?.comments?.map((comment) => (
-											<div key={comment._id} className='flex gap-2 items-start'>
-												<div className='avatar'>
-													<div className='w-8 rounded-full'>
+											<div key={comment._id} className='flex gap-3 items-start p-3 bg-slate-700/30 rounded-xl'>
+												<div className='avatar flex-shrink-0'>
+													<div className='w-8 h-8 rounded-full ring-2 ring-slate-600'>
 														<img
 															src={comment?.user?.profileImg || "/avatar-placeholder.png"}
 														/>
 													</div>
 												</div>
 												<div className='flex flex-col'>
-													<div className='flex items-center gap-1'>
-														<span className='font-bold'>{comment?.user?.fullName}</span>
-														<span className='text-gray-700 text-sm'>
+													<div className='flex items-center gap-2 mb-1'>
+														<span className='font-semibold text-white'>{comment?.user?.fullName}</span>
+														<span className='text-slate-400 text-sm'>
 															@{comment?.user?.username}
 														</span>
 													</div>
-													<div className='text-sm'>{comment?.text}</div>
+													<div className='text-slate-200 text-sm leading-relaxed'>{comment?.text}</div>
 												</div>
 											</div>
 										))}
 									</div>
 									<form
-										className='flex gap-2 items-center mt-4 border-t border-gray-600 pt-2'
+										className='flex gap-3 items-end mt-6 pt-4 border-t border-slate-600'
 										onSubmit={handlePostComment}
 									>
 										<textarea
-											className='textarea w-full p-1 rounded text-md resize-none border focus:outline-none  border-gray-800'
+											className='flex-1 p-3 rounded-xl bg-slate-700/50 border border-slate-600 text-white placeholder-slate-400 focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 resize-none transition-all duration-200'
 											placeholder='Add a comment...'
 											value={comment}
 											onChange={(e) => setComment(e.target.value)}
+											rows={2}
 										/>
-										<button className='btn btn-primary rounded-full btn-sm text-white px-4'>
-										{isCommenting ? <LoadingSpinner size='md' /> : "Post"}
+										<button 
+											className='bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200 transform hover:scale-105 disabled:opacity-50'
+											disabled={!comment.trim() || isCommenting}
+										>
+											{isCommenting ? <LoadingSpinner size='sm' /> : "Post"}
 										</button>
 									</form>
 								</div>
@@ -220,30 +233,34 @@ const Post = ({ post }) => {
 									<button className='outline-none'>close</button>
 								</form>
 							</dialog>
-							<div className='flex gap-1 items-center group cursor-pointer'>
-								<BiRepost className='w-6 h-6  text-slate-500 group-hover:text-green-500' />
-								<span className='text-sm text-slate-500 group-hover:text-green-500'>0</span>
+							
+							<div className='flex gap-2 items-center group cursor-pointer p-2 rounded-full hover:bg-green-500/10 transition-all duration-200'>
+								<BiRepost className='w-5 h-5 text-slate-400 group-hover:text-green-400 transition-colors duration-200' />
+								<span className='text-sm text-slate-400 group-hover:text-green-400 transition-colors duration-200'>0</span>
 							</div>
-							<div className='flex gap-1 items-center group cursor-pointer' onClick={handleLikePost}>
+							
+							<div className='flex gap-2 items-center group cursor-pointer p-2 rounded-full hover:bg-pink-500/10 transition-all duration-200' onClick={handleLikePost}>
 								{isLiking && <LoadingSpinner size='sm' />}
 								{!isLiked && !isLiking && (
-									<FaRegHeart className='w-4 h-4 cursor-pointer text-slate-500 group-hover:text-pink-500' />
+									<FaRegHeart className='w-4 h-4 cursor-pointer text-slate-400 group-hover:text-pink-400 transition-colors duration-200' />
 								)}
 								{isLiked && !isLiking && (
-									<FaRegHeart className='w-4 h-4 cursor-pointer text-pink-500 ' />
+									<FaRegHeart className='w-4 h-4 cursor-pointer text-pink-500 animate-pulse' />
 								)}
 
 								<span
-									className={`text-sm  group-hover:text-pink-500 ${
-										isLiked ? "text-pink-500" : "text-slate-500"
+									className={`text-sm transition-colors duration-200 ${
+										isLiked ? "text-pink-500" : "text-slate-400 group-hover:text-pink-400"
 									}`}
 								>
 									{post?.likes?.length}
 								</span>
 							</div>
 						</div>
-						<div className='flex w-1/3 justify-end gap-2 items-center'>
-							<FaRegBookmark className='w-4 h-4 text-slate-500 cursor-pointer' />
+						<div className='flex gap-2 items-center'>
+							<button className='p-2 rounded-full hover:bg-slate-600/50 text-slate-400 hover:text-slate-300 transition-all duration-200'>
+								<FaRegBookmark className='w-4 h-4' />
+							</button>
 						</div>
 					</div>
 				</div>
