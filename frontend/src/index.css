@@ -30,6 +30,7 @@
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
   --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  --shadow-3xl: 0 35px 60px -12px rgb(0 0 0 / 0.4);
 }
 
 /* Premium Typography */
@@ -74,6 +75,21 @@ body {
   @apply scale-[0.98];
 }
 
+.btn-premium:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn-premium:hover:before {
+  left: 100%;
+}
+
 /* Premium Animations */
 @keyframes fade-in-up {
   from {
@@ -86,8 +102,49 @@ body {
   }
 }
 
+@keyframes fade-in-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
 .animate-fade-in-up {
   animation: fade-in-up 0.6s ease-out;
+}
+
+.animate-fade-in-scale {
+  animation: fade-in-scale 0.4s ease-out;
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 3s ease-in-out infinite;
 }
 
 /* Premium Scroll */
@@ -106,4 +163,28 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(100 116 139);
+}
+
+/* Premium Shadow Classes */
+.shadow-3xl {
+  box-shadow: var(--shadow-3xl);
+}
+
+/* Premium Gradient Text */
+.gradient-text {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Premium Card Hover Effects */
+.card-premium {
+  @apply transition-all duration-300 hover:scale-[1.02] hover:shadow-xl;
+}
+
+/* Premium Selection */
+::selection {
+  background-color: rgba(59, 130, 246, 0.3);
+  color: white;
 }

@@ -58,7 +58,7 @@ const LoginPage = () => {
 			<div className='absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-full blur-3xl'></div>
 			<div className='absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-purple-500/10 to-pink-500/10 rounded-full blur-3xl'></div>
 			
-			<div className='max-w-screen-xl mx-auto flex h-screen relative z-10'>
+			<div className='max-w-screen-xl mx-auto flex h-screen relative z-10 px-4 sm:px-6 lg:px-8'>
 				<div className='flex-1 hidden lg:flex items-center justify-center relative p-8'>
 					<div className='absolute inset-0 glass rounded-3xl m-4 shadow-2xl'></div>
 					<div className='relative z-10 text-center animate-fade-in-up'>
@@ -66,7 +66,7 @@ const LoginPage = () => {
 							<img src="orbit.png" className='lg:w-72 mx-auto drop-shadow-2xl hover:scale-105 transition-all duration-500 filter saturate-110' />
 							<div className='absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full blur-2xl'></div>
 						</div>
-						<h2 className='text-4xl font-bold text-white mb-6 bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 bg-clip-text text-transparent leading-tight'>
+						<h2 className='text-3xl lg:text-4xl font-bold text-white mb-6 bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 bg-clip-text text-transparent leading-tight'>
 							Welcome to Orbit
 						</h2>
 						<p className='text-slate-300 text-lg max-w-md mx-auto leading-relaxed font-medium'>
@@ -80,13 +80,13 @@ const LoginPage = () => {
 					</div>
 				</div>
 				
-				<div className='flex-1 flex flex-col justify-center items-center px-8'>
+				<div className='flex-1 flex flex-col justify-center items-center px-4 sm:px-8'>
 					<div className='w-full max-w-md'>
-						<form className='glass rounded-3xl p-10 shadow-2xl animate-fade-in-up' onSubmit={handleSubmit}>
-							<div className='text-center mb-10'>
+						<form className='glass rounded-3xl p-8 sm:p-10 shadow-2xl animate-fade-in-up' onSubmit={handleSubmit}>
+							<div className='text-center mb-8 sm:mb-10'>
 								<img src="orbit.png" className='w-16 h-16 mx-auto mb-6 lg:hidden drop-shadow-lg' />
-								<h1 className='text-4xl font-bold text-white mb-3 tracking-tight'>Let&apos;s go.</h1>
-								<p className='text-slate-400 text-lg font-medium'>Sign in to your account</p>
+								<h1 className='text-3xl sm:text-4xl font-bold text-white mb-3 tracking-tight'>Let&apos;s go.</h1>
+								<p className='text-slate-400 text-base sm:text-lg font-medium'>Sign in to your account</p>
 							</div>
 							
 							<div className='space-y-6'>
@@ -118,7 +118,7 @@ const LoginPage = () => {
 									</label>
 								</div>
 								
-								<button className='w-full btn-premium bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-4 px-6 rounded-2xl shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed text-lg'>
+								<button className='w-full btn-premium bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-3 sm:py-4 px-6 rounded-2xl shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed text-base sm:text-lg'>
 									{isPending ? (
 										<div className='flex items-center justify-center gap-3'>
 											<div className='w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin'></div>
@@ -129,16 +129,16 @@ const LoginPage = () => {
 								
 								{isError && (
 									<div className='bg-red-500/10 border border-red-500/30 rounded-2xl p-4 animate-fade-in-up'>
-										<p className='text-red-400 text-center font-medium'>{error.message}</p>
+										<p className='text-red-400 text-center font-medium text-sm sm:text-base'>{error.message}</p>
 									</div>
 								)}
 							</div>
 						</form>
 						
-						<div className='text-center mt-8 animate-fade-in-up' style={{animationDelay: '0.2s'}}>
-							<p className='text-slate-300 mb-6 text-lg font-medium'>Don&apos;t have an account?</p>
+						<div className='text-center mt-6 sm:mt-8 animate-fade-in-up' style={{animationDelay: '0.2s'}}>
+							<p className='text-slate-300 mb-4 sm:mb-6 text-base sm:text-lg font-medium'>Don&apos;t have an account?</p>
 							<Link to='/signup'>
-								<button className='w-full btn-premium bg-transparent border-2 border-slate-600/50 hover:border-blue-500/50 text-slate-300 hover:text-white font-semibold py-4 px-6 rounded-2xl transition-all duration-300 hover:bg-slate-700/20 hover:shadow-lg text-lg'>
+								<button className='w-full btn-premium bg-transparent border-2 border-slate-600/50 hover:border-blue-500/50 text-slate-300 hover:text-white font-semibold py-3 sm:py-4 px-6 rounded-2xl transition-all duration-300 hover:bg-slate-700/20 hover:shadow-lg text-base sm:text-lg'>
 									Create Account
 								</button>
 							</Link>
