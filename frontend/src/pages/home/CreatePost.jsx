@@ -59,24 +59,27 @@ const CreatePost = () => {
 	};
 
 	return (
-		<div className='flex p-6 items-start gap-4 border-b border-slate-700/50 bg-slate-900/30 backdrop-blur-sm'>
+		<div className='flex p-8 items-start gap-5 border-b border-slate-700/30 glass animate-fade-in-up'>
 			<div className='avatar flex-shrink-0'>
-				<div className='w-12 h-12 rounded-full ring-2 ring-slate-600'>
-					<img src={authUser.profileImg || "/avatar-placeholder.png"} />
+				<div className='w-14 h-14 rounded-full ring-2 ring-slate-600/50 overflow-hidden hover:ring-blue-500/50 transition-all duration-300'>
+					<img 
+						src={authUser.profileImg || "/avatar-placeholder.png"} 
+						className="w-full h-full object-cover"
+					/>
 				</div>
 			</div>
-			<form className='flex flex-col gap-4 w-full' onSubmit={handleSubmit}>
+			<form className='flex flex-col gap-6 w-full' onSubmit={handleSubmit}>
 				<textarea
-					className='w-full p-4 text-lg resize-none border border-slate-600/50 rounded-xl bg-slate-800/50 text-white placeholder-slate-400 focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all duration-200 min-h-[120px]'
+					className='w-full p-5 text-lg resize-none glass rounded-2xl text-white placeholder-slate-400 focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 min-h-[140px] font-medium leading-relaxed'
 					placeholder="What's happening?"
 					value={text}
 					onChange={(e) => setText(e.target.value)}
 				/>
 				{img && (
-					<div className='relative w-full max-w-md mx-auto'>
+					<div className='relative w-full max-w-lg mx-auto'>
 						<button
 							type="button"
-							className='absolute top-2 right-2 text-white bg-slate-900/80 hover:bg-red-600/80 rounded-full w-8 h-8 flex items-center justify-center cursor-pointer transition-colors duration-200 z-10'
+							className='absolute top-3 right-3 text-white glass hover:bg-red-500/20 hover:text-red-400 rounded-full w-10 h-10 flex items-center justify-center cursor-pointer transition-all duration-300 z-10 shadow-lg backdrop-blur-sm'
 							onClick={() => {
 								setImg(null);
 								imgRef.current.value = null;
@@ -84,35 +87,35 @@ const CreatePost = () => {
 						>
 							<IoCloseSharp className='w-5 h-5' />
 						</button>
-						<img src={img} className='w-full max-h-80 object-cover rounded-xl border border-slate-600/50' />
+						<img src={img} className='w-full max-h-96 object-cover rounded-2xl shadow-2xl border border-slate-600/30' />
 					</div>
 				)}
 
-				<div className='flex justify-between items-center pt-2 border-t border-slate-700/50'>
-					<div className='flex gap-3 items-center'>
+				<div className='flex justify-between items-center pt-4 border-t border-slate-700/30'>
+					<div className='flex gap-2 items-center'>
 						<button
 							type="button"
-							className='p-2 rounded-full hover:bg-blue-500/20 text-blue-400 hover:text-blue-300 transition-all duration-200'
+							className='p-3 glass rounded-full hover:shadow-lg hover:border-blue-500/30 text-blue-400 hover:text-blue-300 transition-all duration-300 group'
 							onClick={() => imgRef.current.click()}
 						>
-							<CiImageOn className='w-6 h-6' />
+							<CiImageOn className='w-6 h-6 group-hover:scale-110 transition-transform duration-200' />
 						</button>
 						<button
 							type="button"
-							className='p-2 rounded-full hover:bg-yellow-500/20 text-yellow-400 hover:text-yellow-300 transition-all duration-200'
+							className='p-3 glass rounded-full hover:shadow-lg hover:border-yellow-500/30 text-yellow-400 hover:text-yellow-300 transition-all duration-300 group'
 						>
-							<BsEmojiSmileFill className='w-5 h-5' />
+							<BsEmojiSmileFill className='w-5 h-5 group-hover:scale-110 transition-transform duration-200' />
 						</button>
 					</div>
 					<input type='file' accept="image/*" hidden ref={imgRef} onChange={handleImgChange} />
 					<button 
-						className='bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold px-6 py-2 rounded-full transition-all duration-200 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none'
+						className='btn-premium bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold px-8 py-3 rounded-2xl shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed text-base'
 						disabled={isPending || (!text.trim() && !img)}
 					>
 						{isPending ? (
-							<div className='flex items-center gap-2'>
+							<div className='flex items-center gap-3'>
 								<div className='w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin'></div>
-								Posting...
+								<span className='font-medium'>Posting...</span>
 							</div>
 						) : "Post"}
 					</button>
