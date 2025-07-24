@@ -11,7 +11,7 @@ import RightPanel from './components/common/RightPanel'
 import {Toaster} from "react-hot-toast"
 import { useQuery } from '@tanstack/react-query'
 import LoadingSpinner from './components/common/LoadingSpinner'
-import { ThemeProvider } from './utils/ThemeContext'
+import { ThemeProvider } from './contexts/ThemeContext'
 
 function App() {
   const {data:authUser,isLoading} = useQuery({

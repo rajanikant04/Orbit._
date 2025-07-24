@@ -1,6 +1,6 @@
 import React from 'react';
 import { MdLightMode, MdDarkMode } from 'react-icons/md';
-import { useTheme } from '../../utils/ThemeContext';
+import { useTheme } from '../../contexts/ThemeContext';
 
 const ThemeToggle = ({ size = 'md', showLabel = false }) => {
   const { isDark, toggleTheme } = useTheme();
