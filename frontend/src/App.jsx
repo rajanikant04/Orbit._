@@ -42,8 +42,12 @@ function App() {
   }
 
   return (
-    <div className='min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900'>
-      <div className='flex max-w-6xl mx-auto backdrop-blur-sm'>
+    <div className='min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 relative'>
+      {/* Premium background elements */}
+      <div className='absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.05),transparent_50%)]'></div>
+      <div className='absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(139,92,246,0.05),transparent_50%)]'></div>
+      
+      <div className='flex max-w-7xl mx-auto backdrop-blur-sm relative z-10'>
         {/* common component */}
         {authUser && <Sidebar />}
         <Routes>
@@ -58,10 +62,13 @@ function App() {
           toastOptions={{
             className: '',
             style: {
-              background: '#1e293b',
+              background: 'rgba(30, 41, 59, 0.9)',
               color: '#fff',
-              border: '1px solid #334155',
-              borderRadius: '12px',
+              border: '1px solid rgba(148, 163, 184, 0.3)',
+              borderRadius: '16px',
+              backdropFilter: 'blur(16px)',
+              fontSize: '14px',
+              fontWeight: '500',
             },
           }}
         />

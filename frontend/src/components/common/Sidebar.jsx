@@ -40,18 +40,18 @@ const Sidebar = () => {
 
   return (
     <div className="md:flex-[2_2_0] w-18 max-w-52">
-      <div className="sticky top-0 left-0 h-screen flex flex-col border-r border-slate-700/50 bg-slate-900/50 backdrop-blur-lg w-20 md:w-full">
-        <Link to="/" className="flex justify-center md:justify-start p-4 group">
+      <div className="sticky top-0 left-0 h-screen flex flex-col glass border-r border-slate-700/30 w-20 md:w-full shadow-xl">
+        <Link to="/" className="flex justify-center md:justify-start p-6 group">
           <div className="relative">
             <img 
               src="/orbit.png" 
-              className="px-2 h-12 w-12 rounded-full hover:scale-110 transition-transform duration-300 drop-shadow-lg" 
+              className="h-12 w-12 rounded-xl hover:scale-110 transition-all duration-500 drop-shadow-2xl filter saturate-110" 
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/30 to-purple-500/30 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
           </div>
         </Link>
         
-        <nav className="flex flex-col gap-2 mt-6 px-2">
+        <nav className="flex flex-col gap-3 mt-4 px-3">
           <NavItem 
             to="/" 
             icon={<MdHomeFilled className="w-7 h-7" />} 
@@ -69,34 +69,42 @@ const Sidebar = () => {
           />
         </nav>
         
+        <div className="flex-1"></div>
+        
         {authUser && (
-          <Link
-            to={`/profile/${authUser.username}`}
-            className="mt-auto mb-6 mx-2 flex gap-3 items-center p-3 rounded-xl hover:bg-slate-800/50 transition-all duration-300 group border border-transparent hover:border-slate-700/50"
-          >
-            <div className="avatar">
-              <div className="w-10 h-10 rounded-full ring-2 ring-slate-700 group-hover:ring-blue-500/50 transition-all duration-300">
-                <img src={authUser?.profileImg || "/avatar-placeholder.png"} />
+          <div className="mb-6 mx-3">
+            <Link
+              to={`/profile/${authUser.username}`}
+              className="flex gap-3 items-center p-4 glass rounded-2xl hover:shadow-lg transition-all duration-300 group border border-transparent hover:border-blue-500/30"
+            >
+              <div className="avatar">
+                <div className="w-12 h-12 rounded-full ring-2 ring-slate-600/50 group-hover:ring-blue-500/50 transition-all duration-300 overflow-hidden">
+                  <img 
+                    src={authUser?.profileImg || "/avatar-placeholder.png"} 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
               </div>
-            </div>
-            <div className="hidden md:flex justify-between flex-1 items-center">
-              <div>
-                <p className="text-white font-semibold text-sm truncate max-w-[120px]">
-                  {authUser?.fullName}
-                </p>
-                <p className="text-slate-400 text-xs">@{authUser?.username}</p>
+              <div className="hidden md:flex justify-between flex-1 items-center">
+                <div className="flex-1 min-w-0">
+                  <p className="text-white font-semibold text-sm truncate">
+                    {authUser?.fullName}
+                  </p>
+                  <p className="text-slate-400 text-xs truncate">@{authUser?.username}</p>
+                </div>
+                <button
+                  className="p-2 rounded-full hover:bg-red-500/20 hover:text-red-400 transition-all duration-200 ml-2 opacity-0 group-hover:opacity-100"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    logout();
+                  }}
+                  title="Sign out"
+                >
+                  <BiLogOut className="w-4 h-4" />
+                </button>
               </div>
-              <button
-                className="p-2 rounded-full hover:bg-red-500/20 hover:text-red-400 transition-colors duration-200 group"
-                onClick={(e) => {
-                  e.preventDefault();
-                  logout();
-                }}
-              >
-                <BiLogOut className="w-5 h-5" />
-              </button>
-            </div>
-          </Link>
+            </Link>
+          </div>
         )}
       </div>
     </div>
@@ -108,14 +116,15 @@ const NavItem = ({ to, icon, text }) => {
     <li className="flex justify-center md:justify-start">
       <Link
         to={to}
-        className="flex gap-4 items-center p-3 rounded-xl hover:bg-slate-800/50 transition-all duration-300 group border border-transparent hover:border-slate-700/50 hover:shadow-lg w-full md:w-auto"
+        className="flex gap-4 items-center p-4 glass rounded-2xl hover:shadow-lg transition-all duration-300 group border border-transparent hover:border-blue-500/30 w-full md:w-auto relative overflow-hidden"
       >
-        <div className="text-slate-400 group-hover:text-white transition-colors duration-200">
+        <div className="text-slate-400 group-hover:text-blue-400 transition-colors duration-200 relative z-10">
           {icon}
         </div>
-        <span className="text-lg font-medium text-slate-300 group-hover:text-white transition-colors duration-200 hidden md:block">
+        <span className="text-lg font-medium text-slate-300 group-hover:text-white transition-colors duration-200 hidden md:block relative z-10">
           {text}
         </span>
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
       </Link>
     </li>
   );
