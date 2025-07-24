@@ -40,64 +40,61 @@ const Sidebar = () => {
 
   return (
     <div className="md:flex-[2_2_0] w-18 max-w-52">
-      <div className="sticky top-0 left-0 h-screen flex flex-col border-r border-gray-700 w-20 md:w-full">
-        <Link to="/" className="flex justify-center md:justify-start">
-          <img src="/orbit.png" className="px-2 h-15 rounded-full fill-white hover:bg-stone-900" />
+      <div className="sticky top-0 left-0 h-screen flex flex-col border-r border-slate-700/50 bg-slate-900/50 backdrop-blur-lg w-20 md:w-full">
+        <Link to="/" className="flex justify-center md:justify-start p-4 group">
+          <div className="relative">
+            <img 
+              src="/orbit.png" 
+              className="px-2 h-12 w-12 rounded-full hover:scale-110 transition-transform duration-300 drop-shadow-lg" 
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          </div>
         </Link>
-        <ul className="flex flex-col gap-3 mt-4">
-          <li className="flex justify-center md:justify-start">
-            <Link
-              to="/"
-              className="flex gap-3 items-center hover:bg-stone-900 transition-all rounded-full duration-300 py-2 pl-2 pr-4 max-w-fit cursor-pointer"
-            >
-              <MdHomeFilled className="w-8 h-8" />
-              <span className="text-lg hidden md:block">Home</span>
-            </Link>
-          </li>
-          <li className="flex justify-center md:justify-start">
-            <Link
-              to="/notifications"
-              className="flex gap-3 items-center hover:bg-stone-900 transition-all rounded-full duration-300 py-2 pl-2 pr-4 max-w-fit cursor-pointer"
-            >
-              <IoNotifications className="w-6 h-6" />
-              <span className="text-lg hidden md:block">Notifications</span>
-            </Link>
-          </li>
-
-          <li className="flex justify-center md:justify-start">
-            <Link
-              to={`/profile/${authUser?.username}`}
-              className="flex gap-3 items-center hover:bg-stone-900 transition-all rounded-full duration-300 py-2 pl-2 pr-4 max-w-fit cursor-pointer"
-            >
-              <FaUser className="w-6 h-6" />
-              <span className="text-lg hidden md:block">Profile</span>
-            </Link>
-          </li>
-        </ul>
+        
+        <nav className="flex flex-col gap-2 mt-6 px-2">
+          <NavItem 
+            to="/" 
+            icon={<MdHomeFilled className="w-7 h-7" />} 
+            text="Home" 
+          />
+          <NavItem 
+            to="/notifications" 
+            icon={<IoNotifications className="w-6 h-6" />} 
+            text="Notifications" 
+          />
+          <NavItem 
+            to={`/profile/${authUser?.username}`} 
+            icon={<FaUser className="w-6 h-6" />} 
+            text="Profile" 
+          />
+        </nav>
+        
         {authUser && (
           <Link
             to={`/profile/${authUser.username}`}
-            className="mt-auto mb-10 flex gap-2 items-start transition-all duration-300 hover:bg-[#181818] py-2 px-4 rounded-full"
+            className="mt-auto mb-6 mx-2 flex gap-3 items-center p-3 rounded-xl hover:bg-slate-800/50 transition-all duration-300 group border border-transparent hover:border-slate-700/50"
           >
-            <div className="avatar hidden md:inline-flex">
-              <div className="w-8 rounded-full">
+            <div className="avatar">
+              <div className="w-10 h-10 rounded-full ring-2 ring-slate-700 group-hover:ring-blue-500/50 transition-all duration-300">
                 <img src={authUser?.profileImg || "/avatar-placeholder.png"} />
               </div>
             </div>
-            <div className="flex justify-between flex-1">
-              <div className="hidden md:block">
-                <p className="text-white font-bold text-sm w-20 truncate">
+            <div className="hidden md:flex justify-between flex-1 items-center">
+              <div>
+                <p className="text-white font-semibold text-sm truncate max-w-[120px]">
                   {authUser?.fullName}
                 </p>
-                <p className="text-slate-500 text-sm">@{authUser?.username}</p>
+                <p className="text-slate-400 text-xs">@{authUser?.username}</p>
               </div>
-              <BiLogOut
-                className="w-5 h-5 cursor-pointer"
+              <button
+                className="p-2 rounded-full hover:bg-red-500/20 hover:text-red-400 transition-colors duration-200 group"
                 onClick={(e) => {
                   e.preventDefault();
                   logout();
                 }}
-              />
+              >
+                <BiLogOut className="w-5 h-5" />
+              </button>
             </div>
           </Link>
         )}
@@ -105,4 +102,23 @@ const Sidebar = () => {
     </div>
   );
 };
+
+const NavItem = ({ to, icon, text }) => {
+  return (
+    <li className="flex justify-center md:justify-start">
+      <Link
+        to={to}
+        className="flex gap-4 items-center p-3 rounded-xl hover:bg-slate-800/50 transition-all duration-300 group border border-transparent hover:border-slate-700/50 hover:shadow-lg w-full md:w-auto"
+      >
+        <div className="text-slate-400 group-hover:text-white transition-colors duration-200">
+          {icon}
+        </div>
+        <span className="text-lg font-medium text-slate-300 group-hover:text-white transition-colors duration-200 hidden md:block">
+          {text}
+        </span>
+      </Link>
+    </li>
+  );
+};
+
 export default Sidebar;

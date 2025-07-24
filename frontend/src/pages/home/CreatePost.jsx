@@ -59,46 +59,69 @@ const CreatePost = () => {
 	};
 
 	return (
-		<div className='flex p-4 items-start gap-4 border-b border-gray-700'>
-			<div className='avatar'>
-				<div className='w-8 rounded-full'>
+		<div className='flex p-6 items-start gap-4 border-b border-slate-700/50 bg-slate-900/30 backdrop-blur-sm'>
+			<div className='avatar flex-shrink-0'>
+				<div className='w-12 h-12 rounded-full ring-2 ring-slate-600'>
 					<img src={authUser.profileImg || "/avatar-placeholder.png"} />
 				</div>
 			</div>
-			<form className='flex flex-col gap-2 w-full' onSubmit={handleSubmit}>
+			<form className='flex flex-col gap-4 w-full' onSubmit={handleSubmit}>
 				<textarea
-					className='textarea w-full p-0 text-lg resize-none border-none focus:outline-none  border-gray-800'
-					placeholder='What is happening?!'
+					className='w-full p-4 text-lg resize-none border border-slate-600/50 rounded-xl bg-slate-800/50 text-white placeholder-slate-400 focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all duration-200 min-h-[120px]'
+					placeholder="What's happening?"
 					value={text}
 					onChange={(e) => setText(e.target.value)}
 				/>
 				{img && (
-					<div className='relative w-72 mx-auto'>
-						<IoCloseSharp
-							className='absolute top-0 right-0 text-white bg-gray-800 rounded-full w-5 h-5 cursor-pointer'
+					<div className='relative w-full max-w-md mx-auto'>
+						<button
+							type="button"
+							className='absolute top-2 right-2 text-white bg-slate-900/80 hover:bg-red-600/80 rounded-full w-8 h-8 flex items-center justify-center cursor-pointer transition-colors duration-200 z-10'
 							onClick={() => {
 								setImg(null);
 								imgRef.current.value = null;
 							}}
-						/>
-						<img src={img} className='w-full mx-auto h-72 object-contain rounded' />
+						>
+							<IoCloseSharp className='w-5 h-5' />
+						</button>
+						<img src={img} className='w-full max-h-80 object-cover rounded-xl border border-slate-600/50' />
 					</div>
 				)}
 
-				<div className='flex justify-between border-t py-2 border-t-gray-700'>
-					<div className='flex gap-1 items-center'>
-						<CiImageOn
-							className='fill-primary w-6 h-6 cursor-pointer'
+				<div className='flex justify-between items-center pt-2 border-t border-slate-700/50'>
+					<div className='flex gap-3 items-center'>
+						<button
+							type="button"
+							className='p-2 rounded-full hover:bg-blue-500/20 text-blue-400 hover:text-blue-300 transition-all duration-200'
 							onClick={() => imgRef.current.click()}
-						/>
-						<BsEmojiSmileFill className='fill-primary w-5 h-5 cursor-pointer' />
+						>
+							<CiImageOn className='w-6 h-6' />
+						</button>
+						<button
+							type="button"
+							className='p-2 rounded-full hover:bg-yellow-500/20 text-yellow-400 hover:text-yellow-300 transition-all duration-200'
+						>
+							<BsEmojiSmileFill className='w-5 h-5' />
+						</button>
 					</div>
 					<input type='file' accept="image/*" hidden ref={imgRef} onChange={handleImgChange} />
-					<button className='btn btn-primary rounded-full btn-sm text-white px-4'>
-						{isPending ? "Posting..." : "Post"}
+					<button 
+						className='bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold px-6 py-2 rounded-full transition-all duration-200 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none'
+						disabled={isPending || (!text.trim() && !img)}
+					>
+						{isPending ? (
+							<div className='flex items-center gap-2'>
+								<div className='w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin'></div>
+								Posting...
+							</div>
+						) : "Post"}
 					</button>
 				</div>
-				{isError && <div className="text-red-500">{error.message}</div>}
+				{isError && (
+					<div className="bg-red-500/10 border border-red-500/50 rounded-lg p-3">
+						<p className="text-red-400 text-sm">{error.message}</p>
+					</div>
+				)}
 			</form>
 		</div>
 	);

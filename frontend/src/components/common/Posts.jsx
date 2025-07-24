@@ -52,7 +52,13 @@ const Posts = ({ feedType, username, userId }) => {
 					<PostSkeleton />
 				</div>
 			)}
-			{!isLoading && !isRefetching && posts?.length === 0 && <p className='text-center my-4'>No posts in this tab. Switch 👻</p>}
+			{!isLoading && !isRefetching && posts?.length === 0 && (
+				<div className='text-center py-16 px-8'>
+					<div className='text-6xl mb-4'>🌌</div>
+					<p className='text-slate-400 text-lg mb-2'>No posts in this tab yet</p>
+					<p className='text-slate-500 text-sm'>Try switching tabs or following some users!</p>
+				</div>
+			)}
 			{!isLoading && !isRefetching && posts && (
 				<div>
 					{posts.map((post) => (
