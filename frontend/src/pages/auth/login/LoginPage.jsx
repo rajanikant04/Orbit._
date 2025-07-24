@@ -71,7 +71,7 @@ const LoginPage = () => {
 						<form className='bg-slate-800/50 backdrop-blur-lg rounded-2xl p-8 shadow-2xl border border-slate-700/50' onSubmit={handleSubmit}>
 							<div className='text-center mb-8'>
 								<img src="orbit.png" className='w-16 h-16 mx-auto mb-4 lg:hidden' />
-								<h1 className='text-4xl font-extrabold text-white mb-2'>{"Let's"} go.</h1>
+								<h1 className='text-4xl font-extrabold text-white mb-2'>Let&apos;s go.</h1>
 								<p className='text-slate-400'>Sign in to your account</p>
 							</div>
 							
